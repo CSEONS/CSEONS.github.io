@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <ul class="list"> 
+               <li class="list__element active"><a href="#home">Home</a></li>
+               <li class="list__element"><a href="#about">About me</a></li>
+               <li class="list__element"><a href="#skills">Skills</a></li>
+               <li class="list__element"><a href="#hortfolio">Portfolio</a></li>
+               <li class="list__element"><a href="#contacts">Contacts</a></li> 
+            </ul>
+            <div class="header__burger">
+                <span></span>
+            </div>
+       </header>
+   
+       <main class="main">
+            <div class="home" id="home">
+                <div class="info">
+                    <div class="info__name">Denis Novik</div>
+                    <div class="info__info">UX | UI designer 24 years old, Minsk</div>
+                    <div class="info__empty"></div>
+                </div>
+
+                <div class="image"><img src="Photo.png" alt=""></div>
+            </div>
+            <div class="about" id="about">
+                <div class="title">About me</div>
+                <div class="about__block">Hi, i'm Denis - UX/UI designer from Minsk. I'm interested in design and everything connected width it.</div>
+                <div class="about__block">I'm studying at courses "Web and mobile design interfaces" in IT-Academy.</div>
+                <div class="about__block">Ready to implement excellent projects with wonderful people.</div>
+            </div>
+            <div class="skills">
+                <div class="title">Skills</div>
+                <div class="skills__description">I work in such programs as</div>
+                <div class="skills__list">
+                    <div class="skill">
+                        <div class="skill__image"><img src="Ps.png" alt="" srcset=""></div>
+                        <div class="skill__description">Adobe Photoshop</div>
+                        <div class="skill__rating">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill" style="color: #e5e5e5"></i>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <div class="skill__image"><img src="Ai.png" alt="" srcset=""></div>
+                        <div class="skill__description">Adobe illustrator</div>
+                        <div class="skill__rating">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill" style="color: #e5e5e5"></i>
+                            <i class="bi bi-star-fill" style="color: #e5e5e5"></i>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <div class="skill__image"><img src="Ae.png" alt="" srcset=""></div>
+                        <div class="skill__description">Adobe After Effects</div>
+                        <div class="skill__rating">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill" style="color: #e5e5e5"></i>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <div class="skill__image"><img src="Fg.png" alt="" srcset=""></div>
+                        <div class="skill__description">Figma</div>
+                        <div class="skill__rating">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill" style="color: #e5e5e5"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio" id="portfolio">
+                <div class="title">Portfolio</div>
+                <div class="portfolio__list">
+                    <div class="portfolio__block">
+                        <div class="portfolio__image"><img src="portfolio_1.png" alt=""></div>
+                        <div class="portfolio__link"><a href="#">Online fashion store - Homepage</a></div>
+                    </div>
+                    <div class="portfolio__block">
+                        <div class="portfolio__image"><img src="portfolio_2.png" alt=""></div>
+                        <div class="portfolio__link"><a href="#">Reebok Store - Concept</a></div>
+                    </div>
+                    <div class="portfolio__block">
+                        <div class="portfolio__image"><img src="portfolio_3.png" alt=""></div>
+                        <div class="portfolio__link"><a href="#">Braun Landing Page - Concept</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="contacts" id="contacts">
+                <div class="title">Contacts</div>
+                <div class="contacts__description">Want to know more or just chat? You are welcome!</div>
+                <button class="contacts__send-buton">Send message</button>
+                <div class="contacts__link-list">
+                    <div class="contacts__link"><img src="logo_in.png" alt=""><a href="#"></a></img></div>
+                    <div class="contacts__link"><img src="logo_instagram.png" alt=""><a href="#"></a></img></div>
+                    <div class="contacts__link"><img src="logo_be.png" alt=""><a href="#"></a></img></div>
+                    <div class="contacts__link"><img src="logo_ball.png" alt=""><a href="#"></a></img></div>
+                </div>
+                <div class="contacts__info">Like me on LinkedIn, Instagram, Behance, Dribble</div>
+            </div>
+       </main>
+    </div>
+    <script src="jquery.js"></script>
+    <script>
+        $(".header__burger").click(function(e){
+            $(".header__burger, .list").toggleClass("active")
+            $("body").toggleClass("lock")
+        })
+    </script>
+</body>
+</html>
