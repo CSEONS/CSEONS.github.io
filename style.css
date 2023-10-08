@@ -1,0 +1,30 @@
+a {
+    cursor: pointer;
+}
+a.secondary-text:hover{
+    color: #2F3F1C;
+}
+.primary-bg {
+    background-color: #767460;
+}
+.secondary-bg {
+    background-color: #C5D1DF;
+}
+.primary-text {
+    color: #2F3F1C;
+}
+.secondary-text {
+    color: #E3ECF6;
+}
+
+.footer-style {
+    background-color: #767460;
+}
+
+.footer-icon {
+    color: #fff;
+}
+
+.footer-text {
+    color: #fff;
+}
