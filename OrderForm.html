@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en" class="h-100 ">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Hello, world!</title>
+</head>
+
+<body class="h-100">
+    <div class="container-fluid pe-0 ps-0  h-100 position-relative d-flex justify-content-between flex-column">
+        <nav class="navbar navbar-expand-sm navbar-light bg-light">
+            <div class="container">
+                <a class="navbar-brand" href="Index.html">VayDerg</a>
+                <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="collapsibleNavId">
+                    <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="ArticlesList.html">
+                                Статьи
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="ShopList.html">
+                                Магазин
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <main class="main container-xxl flex-grow-1 mt-5 mb-5 ">
+            <form class=" d-flex flex-column justify-content-center h-100">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="formId1" id="formId1" placeholder="">
+                            <label for="formId1">Имя получателя</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-floating mb-3">
+                            <input type="tel" class="form-control phone" name="formId1" id="formId1" placeholder="">
+                            <label for="formId1">Номер получателя</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="" class="form-label">Размер</label>
+                            <select class="form-select form-select-lg" name="" id="">
+                                <option selected>Выберите размер</option>
+                                <option value="0">Белый в черный горошек</option>
+                                <option value="1">Черный в урасную полоску</option>
+                                <option value="2">Монотонно желтый</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn primary-bg secondary-text">Оформить заказ</button>
+            </form>
+        </main>
+        <footer class="footer-style bottom-0 ">
+            <div class="container-xxl d-flex flex-wrap justify-content-between align-items-center py-3 my-4">
+                <div class="col-md-4 d-flex align-items-center footer-text">
+                    <span class="mb-3 mb-md-0">© 2022 Company, {Wayder}</span>
+                </div>
+
+                <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+                    <li class="ms-3"><a class="text-muted" href="#">
+                            <i class="bi bi-telegram footer-icon"></i>
+                    </li>
+                    <li class="ms-3"><a class="text-muted" href="#">
+                            <i class="bi bi-instagram footer-icon"></i>
+                    </li>
+                    <li class="ms-3"><a class="text-muted" href="#">
+                            <i class="bi bi-youtube footer-icon"></i>
+                    </li>
+                </ul>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
+    <script>
+        $(".phone").mask("+7(999)999-9999");
+    </script>
+</body>
+
+</html>
