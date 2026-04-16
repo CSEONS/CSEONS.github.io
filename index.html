@@ -1,69 +1,463 @@
-<!doctype html>
-<html lang="en" class="h-100 ">
-
+<!DOCTYPE html>
+<html lang="ru">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="style.css">
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мои проекты · Dev Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<body class="h-100">
-    <div class="container-fluid pe-0 ps-0  h-100 position-relative d-flex justify-content-between flex-column">
-        <nav class="navbar navbar-expand-sm navbar-light bg-light">
-            <div class="container">
-                <a class="navbar-brand" href="Index.html">VayDerg</a>
-                <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="collapsibleNavId">
-                    <ul class="navbar-nav me-auto mt-2 mt-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="ArticlesList.html">
-                                Статьи
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="http://localhost:7037/Home/Index">
-                                LocalHost
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <main class="main container-xxl flex-grow-1 mt-5 mb-5 ">
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #ffffff;
+            color: #333333;
+            line-height: 1.6;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            margin-bottom: 3rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid #333333;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .title-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .accent-bar {
+            width: 2px;
+            height: 48px;
+            background: #333333;
+            border-radius: 0;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: #000000;
+            letter-spacing: 0.02em;
+        }
+
+        .subtitle {
+            color: #666666;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+            font-weight: 300;
+        }
+
+        /* Tools link */
+        .tools-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: #f5f5f5;
+            border: 2px solid #333333;
+            border-radius: 0;
+            color: #333333;
+            text-decoration: none;
+            font-weight: 400;
+            transition: all 0.2s;
+        }
+
+        .tools-link:hover {
+            border-color: #333333;
+            background: #ffffff;
+            transform: none;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        /* Project Card */
+        .project-card {
+            background: #ffffff;
+            border-radius: 0;
+            padding: 1.5rem;
+            box-shadow: none;
+            border: 2px solid #333333;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: none;
+            box-shadow: none;
+            border-color: #333333;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-icon {
+            width: 48px;
+            height: 48px;
+            background: #f0f0f0;
+            border-radius: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333333;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .project-info {
+            flex: 1;
+        }
+
+        .project-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 0.25rem;
+        }
+
+        .project-status {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: #f0f0f0;
+            color: #333333;
+            border-radius: 0;
+            font-size: 0.75rem;
+            font-weight: 400;
+            margin-top: 0.25rem;
+        }
+
+        .project-description {
+            color: #555555;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            flex: 1;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            padding: 0.25rem 0.75rem;
+            background: #f5f5f5;
+            color: #666666;
+            border-radius: 0;
+            font-size: 0.75rem;
+            font-weight: 400;
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 1rem;
+            border-top: 1px solid #333333;
+        }
+
+        .project-link {
+            color: #333333;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            transition: gap 0.2s;
+        }
+
+        .project-link:hover {
+            gap: 0.5rem;
+            text-decoration: underline;
+        }
+
+        .project-meta {
+            color: #999999;
+            font-size: 0.85rem;
+        }
+
+        /* Add Project Card (если нужно вручную добавить) */
+        .add-project-card {
+            background: #fafafa;
+            border: 2px dashed #333333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .add-project-card:hover {
+            border-color: #333333;
+            background: #f5f5f5;
+        }
+
+        .add-project-content {
+            text-align: center;
+            color: #64748b;
+        }
+
+        .add-project-content .icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 2px solid #333333;
+            text-align: center;
+            color: #999999;
+            font-size: 0.9rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: #666666;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: #333333;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: #ffffff;
+            border-radius: 0;
+            border: 2px dashed #333333;
+        }
+
+        .empty-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .empty-state h3 {
+            color: #000000;
+            margin-bottom: 0.5rem;
+        }
+
+        .empty-state p {
+            color: #666666;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
             
-        </main>
-        <footer class="footer-style bottom-0 ">
-            <div class="container-xxl d-flex flex-wrap justify-content-between align-items-center py-3 my-4">
-                <div class="col-md-4 d-flex align-items-center footer-text">
-                    <span class="mb-3 mb-md-0">© 2022 Company, VayDerg</span>
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <div class="title-section">
+                    <div class="accent-bar"></div>
+                    <div>
+                        <h1>Мои проекты</h1>
+                        <p class="subtitle">Коллекция разработок и экспериментов</p>
+                    </div>
                 </div>
-
-                <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-                    <li class="ms-3"><a class="text-muted" href="#">
-                            <i class="bi bi-telegram footer-icon"></i>
-                    </li>
-                    <li class="ms-3"><a class="text-muted" href="#">
-                            <i class="bi bi-instagram footer-icon"></i>
-                    </li>
-                    <li class="ms-3"><a class="text-muted" href="https://www.youtube.com/@user-ll1bh7lg5i/videos">
-                            <i class="bi bi-youtube footer-icon"></i>
-                    </li>
-                </ul>
+                <a href="Mayda/mayda.html" class="tools-link">
+                    🛠️ Исследовать проект
+                    <span style="font-size: 1.2rem;">→</span>
+                </a>
             </div>
+        </header>
+
+        <div id="projectsContainer">
+            <!-- Проекты будут загружены через JavaScript -->
+        </div>
+
+        <footer class="footer">
+            <div class="footer-links">
+                <a href="https://github.com/CSEONS" target="_blank">GitHub</a>
+            </div>
+            <p>© 2024 · CSEONS</p>
         </footer>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-</body>
+    <script>
+        // Конфигурация проектов - здесь вы указываете свои проекты
+        const projects = [
+            {
+                name: "Mayda",
+                description: "Приложение для обучения детей Чеченскому языку через карточки",
+                status: "active",
+                tags: ["C#", "Unity", "Android"],
+                link: "Mayda/mayda.html",
+                icon: "🎴",
+                updated: "2024"
+            }
+        ];
 
+        // Функция рендеринга проектов
+        function renderProjects() {
+            const container = document.getElementById('projectsContainer');
+            
+            if (projects.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">📭</div>
+                        <h3>Пока нет проектов</h3>
+                        <p>Добавьте проекты в массив projects в коде страницы</p>
+                        <a href="Mayda/mayda.html" class="tools-link" style="display: inline-flex;">
+                            🛠️ Перейти к Mayda
+                        </a>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '<div class="projects-grid">';
+            
+            projects.forEach((project, index) => {
+                const statusColors = {
+                    active: '#10b981',
+                    development: '#f59e0b',
+                    completed: '#3b82f6',
+                    archived: '#94a3b8'
+                };
+                
+                const statusText = {
+                    active: 'Активный',
+                    development: 'В разработке',
+                    completed: 'Завершён',
+                    archived: 'Архив'
+                };
+
+                const statusColor = statusColors[project.status] || '#94a3b8';
+                const statusLabel = statusText[project.status] || project.status;
+
+                html += `
+                    <div class="project-card">
+                        <div class="card-header">
+                            <div class="project-icon">
+                                ${project.icon || '📦'}
+                            </div>
+                            <div class="project-info">
+                                <h3 class="project-title">${project.name}</h3>
+                                <span class="project-status" style="background: ${statusColor}20; color: ${statusColor};">
+                                    ${statusLabel}
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <p class="project-description">${project.description}</p>
+                        
+                        <div class="project-tags">
+                            ${project.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                        </div>
+                        
+                        <div class="card-footer">
+                            <a href="${project.link}" class="project-link" ${project.link === '#' ? 'onclick="comingSoon(event)"' : ''}>
+                                Подробнее →
+                            </a>
+                            <span class="project-meta">${project.updated}</span>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            // Добавляем карточку для новых проектов
+            // html += `
+            //     <div class="project-card add-project-card" onclick="window.location.href='#'">
+            //         <div class="add-project-content">
+            //             <div class="icon">➕</div>
+            //             <h3 style="color: #64748b; margin-bottom: 0.5rem;">Новый проект</h3>
+            //             <p style="color: #94a3b8; font-size: 0.9rem;">Нажмите для добавления (редактируйте вручную)</p>
+            //         </div>
+            //     </div>
+            // `;
+            
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        // Заглушка для ссылок
+        function comingSoon(event) {
+            event.preventDefault();
+            alert('🚧 Этот проект скоро появится здесь!');
+        }
+
+        // Инициализация
+        renderProjects();
+
+        // Добавляем небольшую анимацию появления
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.project-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.5s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
 </html>

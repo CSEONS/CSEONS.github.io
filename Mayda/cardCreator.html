@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Generator · Flat Tools</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #ffffff;
+            color: #333333;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .nav-back {
+            margin-bottom: 2rem;
+        }
+
+        .nav-back a {
+            color: #333333;
+            text-decoration: none;
+            font-weight: 400;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.2s;
+        }
+
+        .nav-back a:hover {
+            gap: 0.75rem;
+        }
+
+        .header {
+            margin-bottom: 3rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid #333333;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .title-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .accent-bar {
+            width: 2px;
+            height: 48px;
+            background: #333333;
+            border-radius: 0;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 400;
+            color: #000000;
+            margin-bottom: 0.25rem;
+            letter-spacing: 0.02em;
+        }
+
+        .subtitle {
+            color: #666666;
+            font-size: 0.95rem;
+            margin-top: 0.25rem;
+            font-weight: 300;
+        }
+
+        .form-card {
+            background: #ffffff;
+            border-radius: 0;
+            padding: 2rem;
+            box-shadow: none;
+            border: 2px solid #333333;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 400;
+            margin-bottom: 0.75rem;
+            color: #000000;
+            font-size: 1rem;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid #333333;
+            border-radius: 0;
+            font-size: 1rem;
+            transition: all 0.2s;
+            font-family: inherit;
+            background: #ffffff;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #333333;
+            box-shadow: none;
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            border: 2px dashed #333333;
+            border-radius: 0;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.2s;
+            cursor: pointer;
+            background: #fafafa;
+        }
+
+        .file-input-wrapper:hover {
+            border-color: #333333;
+            background: #f5f5f5;
+        }
+
+        .file-input-wrapper input {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            cursor: pointer;
+        }
+
+        .file-label {
+            color: #666666;
+        }
+
+        .file-label strong {
+            color: #333333;
+        }
+
+        .preview-container {
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .preview-container.active {
+            display: block;
+        }
+
+        .preview-image {
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: 0;
+            border: 2px solid #333333;
+        }
+
+        .preview-audio {
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+
+        .control-row {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            align-items: center;
+        }
+
+        .slider-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        input[type="range"] {
+            flex: 1;
+        }
+
+        select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #333333;
+            border-radius: 0;
+            font-family: inherit;
+            font-size: 0.95rem;
+            background: #ffffff;
+            color: #333333;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.875rem 1.5rem;
+            border: 2px solid #333333;
+            border-radius: 0;
+            font-weight: 400;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            flex: 1;
+            min-width: 140px;
+        }
+
+        .btn-primary {
+            background: #333333;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #000000;
+            transform: none;
+        }
+
+        .btn-success {
+            background: #555555;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #333333;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333333;
+        }
+
+        .btn-secondary:hover {
+            background: #dddddd;
+        }
+
+        .json-preview {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f5f5f5;
+            border-radius: 0;
+            display: none;
+        }
+
+        .json-preview.active {
+            display: block;
+        }
+
+        .json-preview h3 {
+            margin-bottom: 1rem;
+            color: #000000;
+            font-weight: 600;
+        }
+
+        .json-content {
+            background: #ffffff;
+            padding: 1rem;
+            border-radius: 0;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            max-height: 300px;
+            overflow-y: auto;
+            line-height: 1.5;
+            border: 2px solid #333333;
+            color: #333333;
+        }
+
+        .status-message {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 0;
+            display: none;
+            animation: slideIn 0.3s ease;
+            border-left: 4px solid #cccccc;
+        }
+
+        .status-message.active {
+            display: block;
+        }
+
+        .status-message.success {
+            background: #f0f0f0;
+            color: #333333;
+            border-left-color: #555555;
+        }
+
+        .status-message.error {
+            background: #f5f5f5;
+            color: #333333;
+            border-left-color: #999999;
+        }
+
+        .status-message.info {
+            background: #f0f0f0;
+            color: #333333;
+            border-left-color: #666666;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .file-info {
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            color: #666666;
+        }
+
+        @media (max-width: 640px) {
+            h1 {
+                font-size: 1.75rem;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="nav-back">
+            <a href="../">← На главную</a>
+        </nav>
+
+        <header class="header">
+            <div class="header-content">
+                <div class="title-section">
+                    <div class="accent-bar"></div>
+                    <div>
+                        <h1>🎴 Card Generator</h1>
+                        <p class="subtitle">Создавайте JSON карточки с изображениями и аудио</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="form-card">
+            <form id="cardForm">
+                <div class="form-group">
+                    <label for="cardName">Название карточки</label>
+                    <input 
+                        type="text" 
+                        id="cardName" 
+                        placeholder="Например: Волшебная карта" 
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>Изображение (Sprite) — будет сконвертировано в JPG</label>
+                    <div class="file-input-wrapper" id="imageDropZone">
+                        <input type="file" id="cardImage" accept="image/*" required>
+                        <div class="file-label">
+                            <strong>Выберите файл</strong> или перетащите сюда<br>
+                            <small>PNG, JPG, WEBP, GIF</small>
+                        </div>
+                    </div>
+                    <div class="control-row">
+                        <div class="slider-container">
+                            <label style="margin: 0; font-size: 0.9rem;">Качество JPG:</label>
+                            <input type="range" id="jpgQuality" min="0.1" max="1" step="0.1" value="0.9">
+                            <span id="qualityValue" style="min-width: 45px;">90%</span>
+                        </div>
+                    </div>
+                    <div class="file-info" id="imageInfo"></div>
+                    <div class="preview-container" id="imagePreviewContainer">
+                        <img id="imagePreview" class="preview-image" alt="Preview">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Аудио (AudioClip) — будет сконвертировано в WAV</label>
+                    <div class="file-input-wrapper" id="audioDropZone">
+                        <input type="file" id="cardAudio" accept="audio/*" required>
+                        <div class="file-label">
+                            <strong>Выберите аудио</strong> или перетащите сюда<br>
+                            <small>MP3, WAV, OGG, M4A</small>
+                        </div>
+                    </div>
+                    <div class="control-row">
+                        <label style="margin: 0; font-size: 0.9rem;">Частота дискретизации:</label>
+                        <select id="sampleRate">
+                            <option value="44100">44.1 kHz (CD качество)</option>
+                            <option value="48000" selected>48 kHz (DVD качество)</option>
+                            <option value="22050">22.05 kHz (Радио)</option>
+                            <option value="16000">16 kHz (Голос)</option>
+                        </select>
+                    </div>
+                    <div class="file-info" id="audioInfo"></div>
+                    <div class="preview-container" id="audioPreviewContainer">
+                        <audio id="audioPreview" class="preview-audio" controls></audio>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="btn btn-primary" id="generateBtn">
+                        🔨 Сгенерировать JSON
+                    </button>
+                    <button type="reset" class="btn btn-secondary" id="resetBtn">
+                        🔄 Сбросить
+                    </button>
+                </div>
+
+                <div class="status-message" id="statusMessage"></div>
+
+                <div class="json-preview" id="jsonPreview">
+                    <h3>📄 Сгенерированный JSON</h3>
+                    <div class="json-content" id="jsonContent"></div>
+                    <div class="button-group" style="margin-top: 1rem;">
+                        <button type="button" class="btn btn-success" id="downloadJsonBtn">
+                            ⬇️ Скачать JSON
+                        </button>
+                        <button type="button" class="btn btn-secondary" id="copyJsonBtn">
+                            📋 Копировать
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // State
+        let cardData = {
+            name: '',
+            spriteBase64: '',
+            spriteBase64Pure: '',
+            audioBase64: '',
+            audioBase64Pure: ''
+        };
+
+        let originalFiles = {
+            image: null,
+            audio: null
+        };
+
+        // DOM Elements
+        const elements = {
+            cardName: document.getElementById('cardName'),
+            cardImage: document.getElementById('cardImage'),
+            cardAudio: document.getElementById('cardAudio'),
+            jpgQuality: document.getElementById('jpgQuality'),
+            qualityValue: document.getElementById('qualityValue'),
+            sampleRate: document.getElementById('sampleRate'),
+            generateBtn: document.getElementById('generateBtn'),
+            resetBtn: document.getElementById('resetBtn'),
+            downloadJsonBtn: document.getElementById('downloadJsonBtn'),
+            copyJsonBtn: document.getElementById('copyJsonBtn'),
+            statusMessage: document.getElementById('statusMessage'),
+            jsonPreview: document.getElementById('jsonPreview'),
+            jsonContent: document.getElementById('jsonContent'),
+            imageInfo: document.getElementById('imageInfo'),
+            audioInfo: document.getElementById('audioInfo'),
+            imagePreviewContainer: document.getElementById('imagePreviewContainer'),
+            imagePreview: document.getElementById('imagePreview'),
+            audioPreviewContainer: document.getElementById('audioPreviewContainer'),
+            audioPreview: document.getElementById('audioPreview')
+        };
+
+        // Utility functions
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+        }
+
+        function showStatus(message, type = 'info') {
+            elements.statusMessage.textContent = message;
+            elements.statusMessage.className = `status-message active ${type}`;
+            if (type !== 'error') {
+                setTimeout(() => {
+                    elements.statusMessage.classList.remove('active');
+                }, 5000);
+            }
+        }
+
+        function extractPureBase64(dataUri) {
+            if (!dataUri) return '';
+            const parts = dataUri.split(',');
+            return parts.length === 2 ? parts[1] : dataUri;
+        }
+
+        // Image conversion
+        async function convertImageToJPG(file, quality) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        canvas.width = img.width;
+                        canvas.height = img.height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.fillStyle = '#ffffff';
+                        ctx.fillRect(0, 0, canvas.width, canvas.height);
+                        ctx.drawImage(img, 0, 0);
+                        
+                        canvas.toBlob((blob) => {
+                            const reader = new FileReader();
+                            reader.onload = (e) => resolve(e.target.result);
+                            reader.onerror = reject;
+                            reader.readAsDataURL(blob);
+                        }, 'image/jpeg', quality);
+                    };
+                    img.onerror = reject;
+                    img.src = event.target.result;
+                };
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // Audio conversion
+        async function convertAudioToWAV(file, targetSampleRate) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = async (event) => {
+                    try {
+                        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                        const audioBuffer = await audioContext.decodeAudioData(event.target.result);
+                        
+                        // Resample if needed
+                        let finalBuffer = audioBuffer;
+                        if (audioBuffer.sampleRate !== targetSampleRate) {
+                            const offlineContext = new OfflineAudioContext(
+                                audioBuffer.numberOfChannels,
+                                audioBuffer.duration * targetSampleRate,
+                                targetSampleRate
+                            );
+                            const source = offlineContext.createBufferSource();
+                            source.buffer = audioBuffer;
+                            source.connect(offlineContext.destination);
+                            source.start(0);
+                            finalBuffer = await offlineContext.startRendering();
+                        }
+                        
+                        // Convert to WAV
+                        const wavData = audioBufferToWAV(finalBuffer);
+                        const blob = new Blob([wavData], { type: 'audio/wav' });
+                        const fileReader = new FileReader();
+                        fileReader.onload = (e) => resolve(e.target.result);
+                        fileReader.onerror = reject;
+                        fileReader.readAsDataURL(blob);
+                        
+                    } catch (error) {
+                        reject(error);
+                    }
+                };
+                reader.onerror = reject;
+                reader.readAsArrayBuffer(file);
+            });
+        }
+
+        function audioBufferToWAV(buffer) {
+            const numChannels = buffer.numberOfChannels;
+            const sampleRate = buffer.sampleRate;
+            const format = 1; // PCM
+            const bitDepth = 16;
+            
+            const bytesPerSample = bitDepth / 8;
+            const blockAlign = numChannels * bytesPerSample;
+            
+            const samples = [];
+            for (let i = 0; i < buffer.length; i++) {
+                for (let ch = 0; ch < numChannels; ch++) {
+                    samples.push(buffer.getChannelData(ch)[i]);
+                }
+            }
+            
+            const dataSize = samples.length * bytesPerSample;
+            const bufferSize = 44 + dataSize;
+            const arrayBuffer = new ArrayBuffer(bufferSize);
+            const view = new DataView(arrayBuffer);
+            
+            // WAV header
+            const writeString = (offset, str) => {
+                for (let i = 0; i < str.length; i++) {
+                    view.setUint8(offset + i, str.charCodeAt(i));
+                }
+            };
+            
+            writeString(0, 'RIFF');
+            view.setUint32(4, 36 + dataSize, true);
+            writeString(8, 'WAVE');
+            writeString(12, 'fmt ');
+            view.setUint32(16, 16, true);
+            view.setUint16(20, format, true);
+            view.setUint16(22, numChannels, true);
+            view.setUint32(24, sampleRate, true);
+            view.setUint32(28, sampleRate * blockAlign, true);
+            view.setUint16(32, blockAlign, true);
+            view.setUint16(34, bitDepth, true);
+            writeString(36, 'data');
+            view.setUint32(40, dataSize, true);
+            
+            // Write samples
+            let offset = 44;
+            for (let i = 0; i < samples.length; i++) {
+                const sample = Math.max(-1, Math.min(1, samples[i]));
+                view.setInt16(offset, sample < 0 ? sample * 0x8000 : sample * 0x7FFF, true);
+                offset += 2;
+            }
+            
+            return new Uint8Array(arrayBuffer);
+        }
+
+        // Event Handlers
+        elements.jpgQuality.addEventListener('input', () => {
+            elements.qualityValue.textContent = Math.round(elements.jpgQuality.value * 100) + '%';
+        });
+
+        elements.cardName.addEventListener('input', (e) => {
+            cardData.name = e.target.value;
+        });
+
+        // Image handling
+        elements.cardImage.addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                originalFiles.image = file;
+                elements.imageInfo.textContent = `📷 ${file.name} (${formatFileSize(file.size)})`;
+                
+                try {
+                    showStatus('Конвертация изображения...', 'info');
+                    const base64 = await convertImageToJPG(file, parseFloat(elements.jpgQuality.value));
+                    cardData.spriteBase64 = base64;
+                    cardData.spriteBase64Pure = extractPureBase64(base64);
+                    elements.imagePreview.src = base64;
+                    elements.imagePreviewContainer.classList.add('active');
+                    
+                    const sizeInMB = (cardData.spriteBase64Pure.length * 0.75 / (1024 * 1024)).toFixed(2);
+                    elements.imageInfo.textContent += ` → JPG (${sizeInMB} MB base64)`;
+                    showStatus('Изображение готово', 'success');
+                } catch (error) {
+                    showStatus('Ошибка: ' + error.message, 'error');
+                }
+            }
+        });
+
+        // Audio handling
+        elements.cardAudio.addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                originalFiles.audio = file;
+                elements.audioInfo.textContent = `🔊 ${file.name} (${formatFileSize(file.size)})`;
+                
+                try {
+                    showStatus('Конвертация аудио...', 'info');
+                    const base64 = await convertAudioToWAV(file, parseInt(elements.sampleRate.value));
+                    cardData.audioBase64 = base64;
+                    cardData.audioBase64Pure = extractPureBase64(base64);
+                    elements.audioPreview.src = base64;
+                    elements.audioPreviewContainer.classList.add('active');
+                    
+                    const sizeInMB = (cardData.audioBase64Pure.length * 0.75 / (1024 * 1024)).toFixed(2);
+                    elements.audioInfo.textContent += ` → WAV (${sizeInMB} MB base64)`;
+                    showStatus('Аудио готово', 'success');
+                } catch (error) {
+                    showStatus('Ошибка: ' + error.message, 'error');
+                }
+            }
+        });
+
+        // Generate JSON
+        elements.generateBtn.addEventListener('click', () => {
+            if (!cardData.name.trim()) {
+                showStatus('Введите название карточки', 'error');
+                return;
+            }
+            if (!cardData.spriteBase64Pure) {
+                showStatus('Выберите изображение', 'error');
+                return;
+            }
+            if (!cardData.audioBase64Pure) {
+                showStatus('Выберите аудио', 'error');
+                return;
+            }
+
+            const jsonObject = {
+                Name: cardData.name,
+                SpriteBase64: cardData.spriteBase64Pure,
+                AudioClipBase64: cardData.audioBase64Pure
+            };
+
+            elements.jsonContent.textContent = JSON.stringify(jsonObject, null, 2);
+            elements.jsonPreview.classList.add('active');
+            showStatus('JSON сгенерирован!', 'success');
+        });
+
+        // Download JSON
+        elements.downloadJsonBtn.addEventListener('click', () => {
+            const jsonText = elements.jsonContent.textContent;
+            if (!jsonText) return;
+            
+            const blob = new Blob([jsonText], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${cardData.name.replace(/\s+/g, '_')}_card.mayda`;
+            a.click();
+            URL.revokeObjectURL(url);
+            showStatus('Файл скачан', 'success');
+        });
+
+        // Copy JSON
+        elements.copyJsonBtn.addEventListener('click', async () => {
+            const jsonText = elements.jsonContent.textContent;
+            if (!jsonText) return;
+            
+            try {
+                await navigator.clipboard.writeText(jsonText);
+                showStatus('JSON скопирован в буфер обмена', 'success');
+            } catch (error) {
+                showStatus('Не удалось скопировать', 'error');
+            }
+        });
+
+        // Reset
+        elements.resetBtn.addEventListener('click', () => {
+            cardData = {
+                name: '',
+                spriteBase64: '',
+                spriteBase64Pure: '',
+                audioBase64: '',
+                audioBase64Pure: ''
+            };
+            originalFiles = { image: null, audio: null };
+            
+            elements.cardName.value = '';
+            elements.imagePreviewContainer.classList.remove('active');
+            elements.audioPreviewContainer.classList.remove('active');
+            elements.jsonPreview.classList.remove('active');
+            elements.imageInfo.textContent = '';
+            elements.audioInfo.textContent = '';
+            elements.statusMessage.classList.remove('active');
+            
+            showStatus('Форма сброшена', 'info');
+        });
+
+        // Drag & Drop
+        function setupDragDrop(zoneId, inputId) {
+            const zone = document.getElementById(zoneId);
+            const input = document.getElementById(inputId);
+            
+            zone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                zone.style.borderColor = '#3b82f6';
+                zone.style.background = '#f0f9ff';
+            });
+            
+            zone.addEventListener('dragleave', () => {
+                zone.style.borderColor = '#cbd5e1';
+                zone.style.background = 'transparent';
+            });
+            
+            zone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                zone.style.borderColor = '#cbd5e1';
+                zone.style.background = 'transparent';
+                
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    input.files = files;
+                    input.dispatchEvent(new Event('change'));
+                }
+            });
+        }
+
+        setupDragDrop('imageDropZone', 'cardImage');
+        setupDragDrop('audioDropZone', 'cardAudio');
+    </script>
+</body>
+</html>
